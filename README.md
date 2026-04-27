@@ -1,7 +1,7 @@
 # OpenSSL Encryption Demo
-> Text encryption and decryption using AES-256 via OpenSSL on Kali Linux.
+> Text encryption and decryption using AES-256, DES-CBC and RSA via OpenSSL on Kali Linux.
 
----
+
 
 ## Environment
 | Item | Detail |
@@ -10,7 +10,7 @@
 | Tool | OpenSSL |
 | Interface | Command-line |
 
----
+
 
 ## What is AES-256-CBC?
 
@@ -21,7 +21,7 @@
 - **Salt** → random data added before encryption so the same password never produces the same output twice.
 - **PBKDF2** → converts your plain password into a cryptographically strong key before it's used.
 
----
+
 
 ## Commands
 
@@ -46,7 +46,7 @@ openssl enc -aes-256-cbc -pbkdf2 -d -in message_aes.enc -out message_aes_decrypt
 | `-in` | Input file |
 | `-out` | Output file |
 
----
+
 
 ## Results
 
@@ -56,7 +56,40 @@ openssl enc -aes-256-cbc -pbkdf2 -d -in message_aes.enc -out message_aes_decrypt
 | Decrypt with correct password | Original message restored perfectly |
 | Decrypt with wrong password | Failed, encryption integrity confirmed |
 
+
 ---
+
+## DES-CBC Encryption
+
+**DES (Data Encryption Standard)** is a symmetric encryption algorithm — same concept as AES, one key encrypts and decrypts. It was the global standard before AES but was cracked in under 24 hours in 1999 due to its weak 56-bit key. It is included here for educational comparison only.
+
+
+
+## DES Commands
+
+### Encrypt
+```bash
+openssl enc -des-cbc -salt -pbkdf2 -in message.txt -out message_des.enc
+```
+
+### Decrypt
+```bash
+openssl enc -des-cbc -pbkdf2 -d -in message_des.enc -out message_des_decrypted.txt
+```
+
+
+
+## AES vs DES
+
+| | AES-256 | DES |
+|--|---------|-----|
+| Key size | 256-bit | 56-bit |
+| Status | Industry standard | Broken / legacy |
+| Crackable? | No | Yes — cracked in 1999 |
+| Used today? | Yes | No — educational only |
+
+
 
 ## Project Files
 1. Aes encryption demo.png
+2. des encryption.png
